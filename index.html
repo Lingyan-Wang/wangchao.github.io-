@@ -30,6 +30,8 @@
             }
         }
     </script>
+
+
     <style>
         /* 自定义样式补充 */
         .hero-bg {
@@ -44,30 +46,400 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
     </style>
-</head>
+
+<!-- 完整的多语言系统 -->
+<script>
+// 翻译数据
+const translations = {
+    zh: {
+        // 导航栏
+        "nav.home": "首页",
+        "nav.products": "核心产品",
+        "nav.solutions": "解决方案",
+        "nav.about": "关于我们",
+        "nav.news": "动态",
+        "nav.contact": "联系我们",
+        
+        // Hero Section
+        "hero.tagline": "引领智能运维新时代",
+        "hero.title_line1": "高温净菌防交叉",
+        "hero.title_line2": "人机协同减负担",
+        "hero.subtitle": "High-Temp Sterilization Prevents Cross-Contamination, Human-Robot Collaboration Reduces Labor Burden — ",
+        "hero.company_name": "望潮机器人",
+        "hero.cta_products": "探索产品",
+        "hero.cta_contact": "立即咨询",
+        
+        // 核心价值点
+        "hero.value1_title": "顶尖高校研发",
+        "hero.value1_desc": "浙大、哈工大团队<br>50+核心专利",
+        "hero.value2_title": "全域清洁革命",
+        "hero.value2_desc": "从地面到空间的<br>维度突破",
+        "hero.value3_title": "智能巡检网络",
+        "hero.value3_desc": "巡-监-处<br>一体化平台",
+        "hero.value4_title": "全球业务服务",
+        "hero.value4_desc": "解决方案覆盖<br>多国市场",
+        
+        // Products Section
+        "products.section_title": "核心产品",
+        "products.main_title": "核心产品系列",
+        "products.subtitle": "以技术创新驱动清洁与巡检的智能化变革",
+        "products.c1_label": "望潮 C1",
+        "products.c1_title": "望潮C1 空间具身清洁机器人",
+        "products.c1_tagline": "全球首款\"地面洗吹一体 + 全域类人手清洁\"机器人",
+        "products.stats1_label": "清洁覆盖率",
+        "products.stats2_label": "细菌去除率",
+        "products.stats3_label": "效率提升",
+        "products.stats4_label": "工作面积",
+        "products.feature1": "机身设计：IP54防水，900mm臂展，3KG负载",
+        "products.feature2": "智能物联：<自主呼梯、通行闸机，多机协同作业",
+        "products.feature3": "作业能力：适配多种地面材质，全场景覆盖",
+        "products.details_link": "获取详细参数表",
+        "products.platform_title": "智能巡检平台",
+        "products.platform_desc": "一体化\"巡-监-处\"数字化作业平台，重新定义安防与管理。",
+        "products.platform_feature1_title": "统一接入",
+        "products.platform_feature1_desc": "无缝接入机器狗、无人机、IoT传感器，打破硬件孤岛。",
+        "products.platform_feature2_title": "任务编排与闭环",
+        "products.platform_feature2_desc": "智能告警自动触发工单，实现从发现问题到解决问题的全闭环。",
+        "products.industry1": "能源电力",
+        "products.industry2": "石化仓储",
+        "products.industry3": "轨道交通",
+        "products.industry4": "智慧园区",
+        
+        // Solutions Section
+        "solutions.section_title": "解决方案",
+        "solutions.main_title": "全场景行业解决方案",
+        "solutions.card1_title": "交通枢纽",
+        "solutions.card1_desc": "应对大客流卫生间的高频清洁与安检巡逻。",
+        "solutions.card1_item1": "• 24h不间断作业",
+        "solutions.card1_item2": "• 智能避障人流",
+        "solutions.card2_title": "商业综合体",
+        "solutions.card2_desc": "商场、写字楼的公共区域清洁与夜间巡检。",
+        "solutions.card2_item1": "• 提升品牌形象",
+        "solutions.card2_item2": "• 降低人力成本",
+        "solutions.card3_title": "专业机构",
+        "solutions.card3_desc": "医院、实验室的无菌环境清洁与安全监控。",
+        "solutions.card3_item1": "• 交叉感染防控",
+        "solutions.card3_item2": "• 精准消杀记录",
+        "solutions.card4_title": "工业场景",
+        "solutions.card4_desc": "工厂、管廊的巡检与特种作业。",
+        "solutions.card4_item1": "• 危险环境替代",
+        "solutions.card4_item2": "• 数据实时回传",
+        
+        // About Section
+        "about.section_title": "关于我们",
+        "about.main_title": "全球商用机器人行业的创新引领者",
+        "about.para1": "望潮创新机器人有限公司创立于杭州滨江，是全球商用机器人领域中，以具身智能为核心驱动力的创新者。公司致力于融合前沿机器人技术与人工智能，为全球各行业提供全域智能清洁与无人化巡检解决方案，持续推动生产与商业环境向更安全、更洁净、更高效的方向演进。",
+        "about.para2": "我们的研发基因根植于浙江大学、中国计量大学等顶尖高校实验室，由博士领衔的核心技术团队与具备产业化经验的管理团队共同驱动，全面掌握从机器视觉、动态规划到多机协同的全栈技术体系。目前，公司已拥有10 余项核心专利，旗下\"望潮 C1\"空间具身智能清洁机器人与智能巡检平台，已在交通枢纽、商业综合体、能源电力等关键场景成功落地，正以\"高温净菌防交叉，人机协同减负担\"的实际价值，持续重塑行业标准。",
+        "about.card1_title": "核心技术壁垒",
+        "about.card1_desc": "以具身智能为核心，构建覆盖感知、决策与执行的完整技术闭环，全面掌握 SLAM、机器视觉、动态路径规划与多机协同等关键能力。",
+        "about.card2_title": "专家团队",
+        "about.card2_desc": "团队研发背景源自浙江大学、中国计量大学等顶尖高校实验室，由博士领衔，兼具前沿科研深度与工程化落地能力。",
+        "about.card3_title": "市场愿景",
+        "about.card3_desc": "致力于成为全球领先的智能技术解决方案提供商，让机器人服务于世界的每一个角落。",
+        
+        // News Section
+        "news.section_title": "动态中心",
+        "news.main_title": "动态与洞察",
+        "news.view_more": "查看更多",
+        "news.news1_category": "公司动态",
+        "news.news1_title": "望潮机器人即将亮相世界级展会",
+        "news.news1_desc": "展示最新C1清洁机器人，获得行业专家高度评价...",
+        "news.news2_category": "行业洞察",
+        "news.news2_title": "智慧运维：商用机器人的下一个风口",
+        "news.news2_desc": "探讨如何通过人机协同降低运营成本，提升管理效率...",
+        "news.news3_category": "合作签约",
+        "news.news3_title": "与某大型物业集团达成战略合作",
+        "news.news3_desc": "将在全国50个商业综合体部署智能巡检平台...",
+        
+        // Contact Section
+        "contact.section_title": "联系我们",
+        "contact.main_title": "让我们共同探索智能科技的未来",
+        "contact.desc": "无论您是寻找解决方案，还是希望建立合作关系，我们都期待您的来信。",
+        "contact.address_title": "公司地址",
+        "contact.address": "浙江省杭州市滨江区长河街道滨安路1181号A 幢17 F",
+        "contact.phone_title": "联系电话",
+        "contact.phone": "+86 180 6797 1668",
+        "contact.email_title": "电子邮箱",
+        "contact.email": "wanghuis@dingtalk.com",
+        "contact.form_title": "询价与合作",
+        "contact.form_name": "姓名 *",
+        "contact.form_name_placeholder": "您的姓名",
+        "contact.form_company": "公司 *",
+        "contact.form_company_placeholder": "公司名称",
+        "contact.form_country": "国家/地区 *",
+        "contact.form_country_placeholder": "China",
+        "contact.form_email": "邮箱 *",
+        "contact.form_email_placeholder": "您的邮箱地址",
+        "contact.form_product": "需求类型 *",
+        "contact.form_option0": "请选择需求类型",
+        "contact.form_option1": "清洁机器人 (Wangchao C1)",
+        "contact.form_option2": "智能巡检平台",
+        "contact.form_option3": "定制解决方案",
+        "contact.form_option4": "其他合作",
+        "contact.form_message": "留言内容 *",
+        "contact.form_message_placeholder": "请简述您的需求...",
+        "contact.form_submit": "提交咨询",
+        
+        // Footer
+        "footer.tagline": "重新定义智能运维，让科技服务生活。",
+        "footer.services_title": "业务领域",
+        "footer.services1": "空间具身清洁机器人",
+        "footer.services2": "智能巡检平台",
+        "footer.services3": "工业解决方案",
+        "footer.resources_title": "技术资源",
+        "footer.resources1": "技术白皮书",
+        "footer.resources2": "开发者文档",
+        "footer.resources3": "API 接口",
+        "footer.follow_title": "关注我们",
+        "footer.qr_text": "扫码联系我们",
+        "footer.copyright": "© 2026 望潮创新机器人 版权所有"
+    },
+    
+    en: {
+        // Navigation
+        "nav.home": "Home",
+        "nav.products": "Products",
+        "nav.solutions": "Solutions",
+        "nav.about": "About Us",
+        "nav.news": "News",
+        "nav.contact": "Contact Us",
+        
+        // Hero Section
+        "hero.tagline": "Leading the New Era of Smart Operations",
+        "hero.title_line1": "High-Temp Sterilization",
+        "hero.title_line2": "Prevents Cross-Contamination",
+        "hero.subtitle": "Human-Robot Collaboration Reduces Labor Burden — ",
+        "hero.company_name": "Octopus Robotics",
+        "hero.cta_products": "Explore Products",
+        "hero.cta_contact": "Contact Now",
+        "hero.value1_title": "Top University R&D",
+        "hero.value1_desc": "Zhejiang University, HIT team<br>50+ core patents",
+        "hero.value2_title": "All-Area Cleaning Revolution",
+        "hero.value2_desc": "Dimensional breakthrough<br>from ground to space",
+        "hero.value3_title": "Smart Inspection Network",
+        "hero.value3_desc": "Patrol-Monitor-Process<br>integrated platform",
+        "hero.value4_title": "Global Business Services",
+        "hero.value4_desc": "Solutions covering<br>multiple markets worldwide",
+        
+        // Products Section
+        "products.section_title": "Our Products",
+        "products.main_title": "Core Product Series",
+        "products.subtitle": "Driving intelligent transformation of cleaning and inspection through technological innovation",
+        "products.c1_label": "Wangchao C1",
+        "products.c1_title": "Wangchao C1 Spatial Embodied Cleaning Robot",
+        "products.c1_tagline": "World's first 'ground washing-blowing integrated + all-area human-like cleaning' robot",
+        "products.stats1_label": "Cleaning Coverage",
+        "products.stats2_label": "Bacteria Removal Rate",
+        "products.stats3_label": "Efficiency Improvement",
+        "products.stats4_label": "Working Area",
+        "products.feature1": "Body Design:IP54 waterproof, 900mm arm span, 3KG load capacity",
+        "products.feature2": "Smart IoT: Autonomous elevator calling, access gate passing, multi-robot collaboration",
+        "products.feature3": "Operation Capability: Adapts to various floor materials, full-scenario coverage",
+        "products.details_link": "Get Detailed Specifications",
+        "products.platform_title": "Smart Inspection Platform",
+        "products.platform_desc": "Integrated 'Patrol-Monitor-Process' digital operation platform, redefining security and management.",
+        "products.platform_feature1_title": "Unified Access",
+        "products.platform_feature1_desc": "Seamlessly integrates robot dogs, drones, IoT sensors, breaking hardware silos.",
+        "products.platform_feature2_title": "Task Orchestration & Closure",
+        "products.platform_feature2_desc": "Intelligent alerts automatically trigger work orders, achieving full closure from discovery to resolution.",
+        "products.industry1": "Energy & Power",
+        "products.industry2": "Petrochemical Storage",
+        "products.industry3": "Rail Transit",
+        "products.industry4": "Smart Parks",
+        
+        // Solutions Section
+        "solutions.section_title": "Solutions",
+        "solutions.main_title": "Full-Scenario Industry Solutions",
+        "solutions.card1_title": "Transportation Hubs",
+        "solutions.card1_desc": "High-frequency cleaning and security patrols for high-passenger-flow restrooms.",
+        "solutions.card1_item1": "• 24/7 uninterrupted operation",
+        "solutions.card1_item2": "• Intelligent crowd avoidance",
+        "solutions.card2_title": "Commercial Complexes",
+        "solutions.card2_desc": "Public area cleaning and night patrols for malls and office buildings.",
+        "solutions.card2_item1": "• Enhance brand image",
+        "solutions.card2_item2": "• Reduce labor costs",
+        "solutions.card3_title": "Professional Institutions",
+        "solutions.card3_desc": "Sterile environment cleaning and safety monitoring for hospitals and laboratories.",
+        "solutions.card3_item1": "• Cross-infection prevention",
+        "solutions.card3_item2": "• Precise disinfection records",
+        "solutions.card4_title": "Industrial Scenarios",
+        "solutions.card4_desc": "Inspection and special operations for factories and pipelines.",
+        "solutions.card4_item1": "• Hazardous environment replacement",
+        "solutions.card4_item2": "• Real-time data transmission",
+        
+        // About Section
+        "about.section_title": "About Us",
+        "about.main_title": "Innovation Leader in Global Commercial Robotics Industry",
+        "about.para1": "Octopus Innovation Robotics Co., Ltd., founded in Hangzhou's Binjiang District, is an innovator in the global commercial robotics field, driven by embodied intelligence. The company is dedicated to integrating cutting-edge robotics technology with artificial intelligence, providing all-area intelligent cleaning and unmanned inspection solutions for various industries worldwide, continuously promoting the evolution of production and commercial environments towards safer, cleaner, and more efficient directions.",
+        "about.para2": "Our R&D foundation is rooted in top university laboratories including Zhejiang University and China Jiliang University. Led by a PhD-level core technical team and management team with industrial experience, we comprehensively master the full-stack technology system from machine vision and dynamic planning to multi-robot collaboration. Currently, the company holds over 10 core patents, with our 'Wangchao C1' spatial embodied intelligent cleaning robot and smart inspection platform successfully implemented in key scenarios such as transportation hubs, commercial complexes, and energy & power. We continue to reshape industry standards with the practical value of 'High-Temp Sterilization Prevents Cross-Contamination, Human-Robot Collaboration Reduces Labor Burden.'",
+        "about.card1_title": "Core Technology Barriers",
+        "about.card1_desc": "Centered on embodied intelligence, building a complete technology loop covering perception, decision-making, and execution, comprehensively mastering key capabilities including SLAM, machine vision, dynamic path planning, and multi-robot collaboration.",
+        "about.card2_title": "Expert Team",
+        "about.card2_desc": "The team's R&D background originates from top university laboratories including Zhejiang University and China Jiliang University, led by PhDs, combining cutting-edge research depth with engineering implementation capabilities.",
+        "about.card3_title": "Market Vision",
+        "about.card3_desc": "Committed to becoming a global leading intelligent technology solutions provider, making robots serve every corner of the world.",
+        
+        // News Section
+        "news.section_title": "News Center",
+        "news.main_title": "Updates & Insights",
+        "news.view_more": "View More",
+        "news.news1_category": "Company News",
+        "news.news1_title": "Octopus Robotics to Debut at World-Class Exhibition",
+        "news.news1_desc": "Showcasing the latest C1 cleaning robot, receiving high praise from industry experts...",
+        "news.news2_category": "Industry Insights",
+        "news.news2_title": "Smart Operations: The Next Frontier for Commercial Robots",
+        "news.news2_desc": "Exploring how human-robot collaboration reduces operational costs and improves management efficiency...",
+        "news.news3_category": "Partnership",
+        "news.news3_title": "Strategic Cooperation with Large Property Group",
+        "news.news3_desc": "Will deploy smart inspection platforms in 50 commercial complexes nationwide...",
+        
+        // Contact Section
+        "contact.section_title": "Contact Us",
+        "contact.main_title": "Let's Explore the Future of Intelligent Technology Together",
+        "contact.desc": "Whether you're looking for solutions or hoping to establish partnerships, we look forward to your message.",
+        "contact.address_title": "Company Address",
+        "contact.address": "17F, Building A, No. 1181 Bin'an Road, Changhe Street, Binjiang District, Hangzhou City, Zhejiang Province, China (310051)",
+        "contact.phone_title": "Contact Phone",
+        "contact.phone": "+86 180 6797 1668",
+        "contact.email_title": "Email",
+        "contact.email": "wanghuis@dingtalk.com",
+        "contact.form_title": "Inquiry & Cooperation",
+        "contact.form_name": "Name *",
+        "contact.form_name_placeholder": "Your name",
+        "contact.form_company": "Company *",
+        "contact.form_company_placeholder": "Company name",
+        "contact.form_country": "Country/Region *",
+        "contact.form_country_placeholder": "China",
+        "contact.form_email": "Email *",
+        "contact.form_email_placeholder": "Your email address",
+        "contact.form_product": "Requirement Type *",
+        "contact.form_option0": "Please select requirement type",
+        "contact.form_option1": "Cleaning Robot (Wangchao C1)",
+        "contact.form_option2": "Smart Inspection Platform",
+        "contact.form_option3": "Custom Solutions",
+        "contact.form_option4": "Other Cooperation",
+        "contact.form_message": "Message *",
+        "contact.form_message_placeholder": "Please briefly describe your requirements...",
+        "contact.form_submit": "Submit Inquiry",
+        
+        // Footer
+        "footer.tagline": "Redefining intelligent operations, making technology serve life.",
+        "footer.services_title": "Business Areas",
+        "footer.services1": "Spatial Embodied Cleaning Robots",
+        "footer.services2": "Smart Inspection Platform",
+        "footer.services3": "Industrial Solutions",
+        "footer.resources_title": "Technical Resources",
+        "footer.resources1": "Technical White Papers",
+        "footer.resources2": "Developer Documentation",
+        "footer.resources3": "API Interface",
+        "footer.follow_title": "Follow Us",
+        "footer.qr_text": "Scan to contact us",
+        "footer.copyright": "© 2026 Octopus Innovation Robotics. All rights reserved."
+    }
+};
+
+// 语言切换函数
+function setLanguage(lang) {
+    console.log('切换到语言:', lang);
+    
+    // 更新所有带有data-i18n属性的元素
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+            const translation = translations[lang][key];
+            
+            // 检查是否需要作为HTML处理
+            if (element.hasAttribute('data-i18n-html')) {
+                element.innerHTML = translation;
+            } else {
+                element.textContent = translation;
+            }
+        }
+    });
+    
+    // 更新占位符
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+        const key = element.getAttribute('data-i18n-placeholder');
+        if (translations[lang] && translations[lang][key]) {
+            element.placeholder = translations[lang][key];
+        }
+    });
+    
+    // 更新select选项
+    document.querySelectorAll('select option').forEach(option => {
+        if (option.hasAttribute('data-i18n')) {
+            const key = option.getAttribute('data-i18n');
+            if (translations[lang] && translations[lang][key]) {
+                option.textContent = translations[lang][key];
+            }
+        }
+    });
+    
+    // 更新页面标题
+    if (lang === 'zh') {
+        document.title = "望潮创新机器人 | 重新定义智能运维";
+    } else {
+        document.title = "Octopus Innovation Robotics | Redefining Smart Operations";
+    }
+    
+    // 更新html lang属性
+    document.documentElement.lang = lang;
+    
+    // 保存语言偏好
+    localStorage.setItem('preferred-language', lang);
+    
+    console.log('语言切换完成');
+}
+
+// 页面加载时初始化语言
+document.addEventListener('DOMContentLoaded', function() {
+    // 从localStorage获取保存的语言，或根据浏览器语言自动选择
+    const savedLang = localStorage.getItem('preferred-language');
+    const browserLang = navigator.language.startsWith('zh') ? 'zh' : 'en';
+    const defaultLang = savedLang || browserLang;
+    
+    console.log('初始化语言:', defaultLang);
+    
+    // 设置初始语言
+    setLanguage(defaultLang);
+});
+</script>
+</body>
+</html>
+
 <body class="font-sans text-slate-800 antialiased bg-slate-50">
 
     <!-- 导航栏 -->
-    <nav class="fixed w-full z-50 bg-white shadow-sm transition-all duration-300" id="navbar">
+   <nav id="navbar"
+     class="fixed w-full z-50 bg-transparent transition-all duration-300">
+
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
 			<div class="flex-shrink-0 cursor-pointer" onclick="window.scrollTo(0,0)">
-    			<img src="01.jpg" alt="公司Logo" class="h-8 w-auto">
+    			<img src="01.png" alt="公司Logo" class="h-8 w-auto">
                     </div>
-        
+
                 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#home" class="text-slate-600 hover:text-brand-600 font-medium transition">首页</a>
-                    <a href="#products" class="text-slate-600 hover:text-brand-600 font-medium transition">核心产品</a>
-                    <a href="#solutions" class="text-slate-600 hover:text-brand-600 font-medium transition">解决方案</a>
-                    <a href="#about" class="text-slate-600 hover:text-brand-600 font-medium transition">关于我们</a>
-                    <a href="#news" class="text-slate-600 hover:text-brand-600 font-medium transition">动态</a>
-                    <a href="#contact" class="px-5 py-2.5 bg-brand-600 text-white rounded-full font-medium hover:bg-brand-700 transition shadow-lg shadow-brand-500/30">
+                    <a href="#home" class="text-slate-600 hover:text-brand-600 font-medium transition" data-i18n="nav.home">首页</a>
+                    <a href="#products" class="text-slate-600 hover:text-brand-600 font-medium transition" data-i18n="nav.products">核心产品</a>
+                    <a href="#solutions" class="text-slate-600 hover:text-brand-600 font-medium transition" data-i18n="nav.solutions">解决方案</a>
+                    <a href="#about"  class="text-slate-600 hover:text-brand-600 font-medium transition" data-i18n="nav.about">关于我们</a>
+                    <a href="#news" class="text-slate-600 hover:text-brand-600 font-medium transition" data-i18n="nav.news">动态</a>
+                    <a href="#contact" class="px-5 py-2.5 bg-brand-600 text-white rounded-full font-medium hover:bg-brand-700 transition shadow-lg shadow-brand-500/30" data-i18n="nav.contact">
                         联系我们
                     </a>
                 </div>
+		
+		<!-- Language Switch -->
+<div class="flex items-center gap-2 text-sm ml-4">
+    <button onclick="setLanguage('zh')" class="hover:text-brand-600">中文</button>
+    <span class="text-slate-400">|</span>
+    <button onclick="setLanguage('en')" class="hover:text-brand-600">EN</button>
+</div>
+
 
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
@@ -90,66 +462,74 @@
     </nav>
 
     <!-- 首页 / Hero Section -->
-    <section id="home" class="relative h-screen flex items-center justify-center hero-bg text-white pt-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <span class="inline-block py-1 px-3 rounded-full bg-brand-500/20 border border-brand-400/30 text-brand-200 text-sm font-semibold mb-6 backdrop-blur-sm animate-fade-in-up">
-                引领智能运维新时代
-            </span>
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight">
-                高温净菌防交叉<br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-300 to-white">人机协同减负担</span>
-            </h1>
-            <p class="text-lg md:text-xl text-slate-300 mb-10 max-w-4xl mx-auto font-light leading-relaxed">
-                High-Temp Sterilization Prevents Cross-Contamination, Human-Robot Collaboration Reduces Labor Burden — <span class="text-white font-medium">Octopus Robotics</span>, Redefining Smart Operations.
-            </p>
-            
-            <div class="flex flex-wrap justify-center gap-4 mb-16">
-                <a href="#products" class="px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white rounded-full font-semibold transition shadow-lg shadow-brand-500/40 flex items-center gap-2">
-                    探索产品 <i class="fa-solid fa-arrow-right"></i>
-                </a>
-                <a href="#contact" class="px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white rounded-full font-semibold transition flex items-center gap-2">
-                    立即咨询
-                </a>
-            </div>
+    <section id="home"
+         class="relative h-screen flex items-center justify-center text-white overflow-hidden">
 
-            <!-- 核心价值点 -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center border-t border-white/10 pt-10">
-                <div class="p-4">
-                    <div class="text-brand-400 text-3xl mb-3"><i class="fa-solid fa-graduation-cap"></i></div>
-                    <h3 class="font-bold text-lg">顶尖高校研发</h3>
-                    <p class="text-sm text-slate-400">50+核心专利</p>
-                </div>
-                <div class="p-4">
-                    <div class="text-brand-400 text-3xl mb-3"><i class="fa-solid fa-broom"></i></div>
-                    <h3 class="font-bold text-lg">全域清洁革命</h3>
-                    <p class="text-sm text-slate-400">从地面到空间的<br>维度突破</p>
-                </div>
-                <div class="p-4">
-                    <div class="text-brand-400 text-3xl mb-3"><i class="fa-solid fa-network-wired"></i></div>
-                    <h3 class="font-bold text-lg">智能巡检网络</h3>
-                    <p class="text-sm text-slate-400">“巡-监-处”<br>一体化平台</p>
-                </div>
-                <div class="p-4">
-                    <div class="text-brand-400 text-3xl mb-3"><i class="fa-solid fa-globe"></i></div>
-                    <h3 class="font-bold text-lg">全球业务服务</h3>
-                    <p class="text-sm text-slate-400">解决方案覆盖<br>多国市场</p>
-                </div>
-            </div>
+    <!-- Hero 背景图（最快加载方式） -->
+    <img src="my-hero-bg.png"
+         alt=""
+         fetchpriority="high"
+         loading="eager"
+         class="absolute inset-0 w-full h-full object-cover">
+
+    <!-- 黑色渐变遮罩 -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/10"></div>
+
+    <!-- Hero 内容 -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-24">
+
+
+
+        <span class="inline-block py-1 px-3 rounded-full bg-brand-500/20 border border-brand-400/30 text-brand-200 text-sm font-semibold mb-6 backdrop-blur-sm" data-i18n="hero.tagline">
+            引领智能运维新时代
+        </span>
+
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight" data-i18n="hero.title_line1">
+            高温净菌防交叉<br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-300 to-white" data-i18n="hero.title_line2">
+                人机协同减负担
+            </span>
+        </h1>
+
+        <p class="text-lg md:text-xl text-slate-200 mb-10 max-w-4xl mx-auto font-light leading-relaxed" data-i18n="hero.subtitle">
+            High-Temp Sterilization Prevents Cross-Contamination, Human-Robot Collaboration Reduces Labor Burden —
+            <span class="text-white font-medium">Octopus Robotics</span>, Redefining Smart Operations.
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-4 mb-16">
+            <a href="#products"
+               class="px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white rounded-full font-semibold transition shadow-lg shadow-brand-500/40" data-i18n="hero.cta_products">
+                探索产品 <i class="fa-solid fa-arrow-right ml-2"></i>
+            </a>
+            <a href="#contact"
+               class="px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white rounded-full font-semibold transition" data-i18n="hero.cta_contact">
+                立即咨询
+            </a>
         </div>
-        
-        <!-- 向下滚动指示器 -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce text-white/50">
-            <i class="fa-solid fa-chevron-down text-2xl"></i>
+
+        <!-- 核心价值 -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center border-t border-white/20 pt-10">
+            <!-- 保留你原来的 4 个价值点 -->
         </div>
-    </section>
+    </div>
+
+    <!-- 下滑提示 -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-white/60 z-10">
+        <i class="fa-solid fa-chevron-down text-2xl"></i>
+    </div>
+</section>
+
+
+
+
 
     <!-- 产品页面 -->
     <section id="products" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-brand-600 font-semibold tracking-wide uppercase text-sm mb-2">Our Products</h2>
-                <h3 class="text-3xl md:text-4xl font-bold text-slate-900">核心产品系列</h3>
-                <p class="mt-4 text-xl text-slate-500 max-w-2xl mx-auto">以技术创新驱动清洁与巡检的智能化变革</p>
+                <h3 class="text-3xl md:text-4xl font-bold text-slate-900" data-i18n="products.main_title">核心产品系列</h3>
+                <p class="mt-4 text-xl text-slate-500 max-w-2xl mx-auto" data-i18n="products.subtitle">以技术创新驱动清洁与巡检的智能化变革</p>
             </div>
 
             <!-- 产品 A: 望潮C1 -->
@@ -184,7 +564,7 @@
 
         <!-- 产品标签 -->
         <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-4 py-2 rounded-lg shadow-lg">
-            <span class="font-bold text-brand-600">望潮 C1</span>
+            <span class="font-bold text-brand-600" data-i18n="products.c1_label">望潮 C1</span>
         </div>
 
     </div>
@@ -192,50 +572,53 @@
 
 
 
+
                 </div>
                 <div class="lg:w-1/2">
-                    <h4 class="text-3xl font-bold text-slate-900 mb-2">望潮C1 空间具身清洁机器人</h4>
-                    <p class="text-brand-600 font-medium text-lg mb-6">全球首款“地面洗吹一体 + 全域类人手清洁”机器人</p>
+                    <h4 class="text-3xl font-bold text-slate-900 mb-2" data-i18n="products.c1_title">望潮C1 空间具身清洁机器人</h4>
+                    <p class="text-brand-600 font-medium text-lg mb-6" data-i18n="products.c1_tagline">全球首款“地面洗吹一体 + 全域类人手清洁”机器人</p>
                     
                     <div class="grid grid-cols-2 gap-4 mb-8">
                         <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
                             <div class="text-2xl font-bold text-slate-900">99.2%</div>
-                            <div class="text-sm text-slate-500">清洁覆盖率</div>
+                            <div class="text-sm text-slate-500" data-i18n="products.stats1_label">清洁覆盖率</div>
                         </div>
                         <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
                             <div class="text-2xl font-bold text-slate-900">>99%</div>
-                            <div class="text-sm text-slate-500">细菌去除率</div>
+                            <div class="text-sm text-slate-500"data-i18n="products.stats3_label">细菌去除率</div>
                         </div>
                         <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
                             <div class="text-2xl font-bold text-slate-900">300%</div>
-                            <div class="text-sm text-slate-500">效率提升</div>
+                            <div class="text-sm text-slate-500"data-i18n="products.stats3_label">效率提升</div>
                         </div>
                         <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
                             <div class="text-2xl font-bold text-slate-900">8万㎡</div>
-                            <div class="text-sm text-slate-500">工作面积</div>
+                            <div class="text-sm text-slate-500"data-i18n="products.stats4_label">工作面积</div>
                         </div>
                     </div>
 
                     <ul class="space-y-3 mb-8">
                         <li class="flex items-start">
                             <i class="fa-solid fa-check-circle text-brand-500 mt-1 mr-3"></i>
-                            <span class="text-slate-600"><strong>机身设计：</strong>IP54防水，900mm臂展，3KG负载</span>
+                            <span class="text-slate-600" data-i18n="products.feature1">机身设计：IP54防水，900mm臂展，3KG负载</span>
                         </li>
                         <li class="flex items-start">
                             <i class="fa-solid fa-check-circle text-brand-500 mt-1 mr-3"></i>
-                            <span class="text-slate-600"><strong>智能物联：</strong>自主呼梯、通行闸机，多机协同作业</span>
+                            <span class="text-slate-600" data-i18n="products.feature2">智能物联：自主呼梯、通行闸机，多机协同作业</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fa-solid fa-check-circle text-brand-500 mt-1 mr-3"></i>
-                            <span class="text-slate-600"><strong>作业能力：</strong>适配多种地面材质，全场景覆盖</span>
+                            <i class="fa-solid fa-check-circle text-brand-500 mt-1 mr-3" ></i>
+                            <span class="text-slate-600" data-i18n="products.feature3">作业能力：适配多种地面材质，全场景覆盖</span>
                         </li>
                     </ul>
 
-                    <a href="#contact" class="inline-flex items-center text-brand-600 font-semibold hover:text-brand-800 transition">
+                    <a href="#contact" class="inline-flex items-center text-brand-600 font-semibold hover:text-brand-800 transition" data-i18n="products.details_link">
                         获取详细参数表 <i class="fa-solid fa-arrow-right ml-2"></i>
                     </a>
                 </div>
             </div>
+
+
 
             <!-- 产品 B: 智能巡检平台 -->
             <div class="bg-slate-900 rounded-3xl p-8 md:p-12 text-white overflow-hidden relative">
@@ -246,8 +629,8 @@
                         <div class="inline-block p-3 bg-brand-500/20 rounded-lg mb-4 text-brand-300">
                             <i class="fa-solid fa-tower-observation text-2xl"></i>
                         </div>
-                        <h4 class="text-3xl font-bold mb-4">智能巡检平台</h4>
-                        <p class="text-xl text-slate-300 mb-8">一体化“巡-监-处”数字化作业平台，重新定义安防与管理。</p>
+                        <h4 class="text-3xl font-bold mb-4" data-i18n="products.platform_title">智能巡检平台</h4>
+                        <p class="text-xl text-slate-300 mb-8" data-i18n="products.platform_desc">一体化“巡-监-处”数字化作业平台，重新定义安防与管理。</p>
                         
                         <div class="space-y-6">
                             <div class="flex gap-4">
@@ -255,8 +638,8 @@
                                     <i class="fa-solid fa-link text-brand-400"></i>
                                 </div>
                                 <div>
-                                    <h5 class="font-bold text-lg">统一接入</h5>
-                                    <p class="text-slate-400 text-sm">无缝接入机器狗、无人机、IoT传感器，打破硬件孤岛。</p>
+                                    <h5 class="font-bold text-lg" data-i18n="products.platform_feature1_title">>统一接入</h5>
+                                    <p class="text-slate-400 text-sm" data-i18n="products.platform_feature1_desc">>无缝接入机器狗、无人机、IoT传感器，打破硬件孤岛。</p>
                                 </div>
                             </div>
                             <div class="flex gap-4">
@@ -264,8 +647,8 @@
                                     <i class="fa-solid fa-list-check text-brand-400"></i>
                                 </div>
                                 <div>
-                                    <h5 class="font-bold text-lg">任务编排与闭环</h5>
-                                    <p class="text-slate-400 text-sm">智能告警自动触发工单，实现从发现问题到解决问题的全闭环。</p>
+                                    <h5 class="font-bold text-lg" data-i18n="products.platform_feature2_title">任务编排与闭环</h5>
+                                    <p class="text-slate-400 text-sm" data-i18n="products.platform_feature2_desc">智能告警自动触发工单，实现从发现问题到解决问题的全闭环。</p>
                                 </div>
                             </div>
                         </div>
@@ -274,19 +657,19 @@
                         <div class="grid grid-cols-2 gap-4">
                             <div class="bg-white/5 p-6 rounded-xl border border-white/10 text-center hover:bg-white/10 transition">
                                 <i class="fa-solid fa-bolt text-3xl text-yellow-400 mb-3"></i>
-                                <div class="font-medium">能源电力</div>
+                                <div class="font-medium" data-i18n="products.industry1">能源电力</div>
                             </div>
                             <div class="bg-white/5 p-6 rounded-xl border border-white/10 text-center hover:bg-white/10 transition">
                                 <i class="fa-solid fa-oil-well text-3xl text-orange-400 mb-3"></i>
-                                <div class="font-medium">石化仓储</div>
+                                <div class="font-medium" data-i18n="products.industry2">石化仓储</div>
                             </div>
                             <div class="bg-white/5 p-6 rounded-xl border border-white/10 text-center hover:bg-white/10 transition">
                                 <i class="fa-solid fa-train-subway text-3xl text-blue-400 mb-3"></i>
-                                <div class="font-medium">轨道交通</div>
+                                <div class="font-medium" data-i18n="products.industry3">轨道交通</div>
                             </div>
                             <div class="bg-white/5 p-6 rounded-xl border border-white/10 text-center hover:bg-white/10 transition">
                                 <i class="fa-solid fa-city text-3xl text-purple-400 mb-3"></i>
-                                <div class="font-medium">智慧园区</div>
+                                <div class="font-medium" data-i18n="products.industry4">智慧园区</div>
                             </div>
                         </div>
                     </div>
@@ -295,12 +678,14 @@
         </div>
     </section>
 
+        
+
     <!-- 解决方案 -->
     <section id="solutions" class="py-24 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-brand-600 font-semibold tracking-wide uppercase text-sm mb-2">Solutions</h2>
-                <h3 class="text-3xl md:text-4xl font-bold text-slate-900">全场景行业解决方案</h3>
+                <h3 class="text-3xl md:text-4xl font-bold text-slate-900" data-i18n="solutions.main_title">全场景行业解决方案</h3>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -309,11 +694,11 @@
                     <div class="w-14 h-14 bg-blue-50 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-600 transition">
                         <i class="fa-solid fa-plane-departure text-2xl text-brand-600 group-hover:text-white transition"></i>
                     </div>
-                    <h4 class="text-xl font-bold mb-3">交通枢纽</h4>
-                    <p class="text-slate-500 text-sm mb-4">应对大客流卫生间的高频清洁与安检巡逻。</p>
-                    <ul class="text-xs text-slate-400 space-y-2">
-                        <li>• 24h不间断作业</li>
-                        <li>• 智能避障人流</li>
+                    <h4 class="text-xl font-bold mb-3" data-i18n="solutions.card1_title">交通枢纽</h4>
+                    <p class="text-slate-500 text-sm mb-4" data-i18n="solutions.card1_desc">应对大客流卫生间的高频清洁与安检巡逻。</p>
+                    <ul class="text-xs text-slate-400 space-y-2" >
+                        <li data-i18n="solutions.card1_item1">• 24h不间断作业</li>
+                        <li data-i18n="solutions.card1_item2">• 智能避障人流</li>
                     </ul>
                 </div>
 
@@ -322,11 +707,11 @@
                     <div class="w-14 h-14 bg-blue-50 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-600 transition">
                         <i class="fa-solid fa-building text-2xl text-brand-600 group-hover:text-white transition"></i>
                     </div>
-                    <h4 class="text-xl font-bold mb-3">商业综合体</h4>
-                    <p class="text-slate-500 text-sm mb-4">商场、写字楼的公共区域清洁与夜间巡检。</p>
+                    <h4 class="text-xl font-bold mb-3" data-i18n="solutions.card2_title">商业综合体</h4>
+                    <p class="text-slate-500 text-sm mb-4" data-i18n="solutions.card2_desc">商场、写字楼的公共区域清洁与夜间巡检。</p>
                     <ul class="text-xs text-slate-400 space-y-2">
-                        <li>• 提升品牌形象</li>
-                        <li>• 降低人力成本</li>
+                        <li data-i18n="solutions.card2_item1">• 提升品牌形象</li>
+                        <li data-i18n="solutions.card2_item2">• 降低人力成本</li>
                     </ul>
                 </div>
 
@@ -335,11 +720,11 @@
                     <div class="w-14 h-14 bg-blue-50 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-600 transition">
                         <i class="fa-solid fa-user-doctor text-2xl text-brand-600 group-hover:text-white transition"></i>
                     </div>
-                    <h4 class="text-xl font-bold mb-3">专业机构</h4>
-                    <p class="text-slate-500 text-sm mb-4">医院、实验室的无菌环境清洁与安全监控。</p>
+                    <h4 class="text-xl font-bold mb-3" data-i18n="solutions.card3_title">专业机构</h4>
+                    <p class="text-slate-500 text-sm mb-4" data-i18n="solutions.card3_desc">医院、实验室的无菌环境清洁与安全监控。</p>
                     <ul class="text-xs text-slate-400 space-y-2">
-                        <li>• 交叉感染防控</li>
-                        <li>• 精准消杀记录</li>
+                        <li data-i18n="solutions.card3_item1">• 交叉感染防控</li>
+                        <li data-i18n="solutions.card3_item2">• 精准消杀记录</li>
                     </ul>
                 </div>
 
@@ -348,16 +733,18 @@
                     <div class="w-14 h-14 bg-blue-50 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-600 transition">
                         <i class="fa-solid fa-industry text-2xl text-brand-600 group-hover:text-white transition"></i>
                     </div>
-                    <h4 class="text-xl font-bold mb-3">工业场景</h4>
-                    <p class="text-slate-500 text-sm mb-4">工厂、管廊的巡检与特种作业。</p>
+                    <h4 class="text-xl font-bold mb-3" data-i18n="solutions.card4_title">工业场景</h4>
+                    <p class="text-slate-500 text-sm mb-4" data-i18n="solutions.card4_desc">工厂、管廊的巡检与特种作业。</p>
                     <ul class="text-xs text-slate-400 space-y-2">
-                        <li>• 危险环境替代</li>
-                        <li>• 数据实时回传</li>
+                        <li data-i18n="solutions.card4_item1">• 危险环境替代</li>
+                        <li data-i18n="solutions.card4_item2">• 数据实时回传</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
+
+
 
     <!-- 关于我们 -->
     <section id="about" class="py-24 bg-white relative overflow-hidden">
@@ -368,13 +755,15 @@
             <div class="flex flex-col lg:flex-row gap-16">
                 <div class="lg:w-1/2">
                     <h2 class="text-brand-600 font-semibold tracking-wide uppercase text-sm mb-2">About Us</h2>
-                    <h3 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">全球商用机器人行业的<br>创新引领者</h3>
-                    <p class="text-slate-600 text-lg leading-relaxed mb-6">
-                        望潮创新机器人依托浙江大学、中国计量大学等顶尖高校实验室资源，团队由2名博士领衔，拥有50余项核心专利。
-                    </p>
-                    <p class="text-slate-600 text-lg leading-relaxed mb-8">
-                        我们旨在填补全域商用清洁机器人市场空白，抢占全球千亿级蓝海市场，成为行业标准的制定者。
-                    </p>
+                    <h3 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6" data-i18n ="about.main_title">全球商用机器人行业的创新引领者</h3>
+<p class="text-slate-600 text-lg leading-relaxed mb-6" data-i18n="about.para1">
+    望潮创新机器人有限公司创立于杭州滨江，是全球商用机器人领域中，以具身智能为核心驱动力的创新者。公司致力于融合前沿机器人技术与人工智能，为全球各行业提供全域智能清洁与无人化巡检解决方案，持续推动生产与商业环境向更安全、更洁净、更高效的方向演进。
+</p>
+
+<p class="text-slate-600 text-lg leading-relaxed mb-8" data-i18n="about.para2">
+    我们的研发基因根植于浙江大学、中国计量大学等顶尖高校实验室，由博士领衔的核心技术团队与具备产业化经验的管理团队共同驱动，全面掌握从机器视觉、动态规划到多机协同的全栈技术体系。目前，公司已拥有10 余项核心专利，旗下“望潮 C1”空间具身智能清洁机器人与智能巡检平台，已在交通枢纽、商业综合体、能源电力等关键场景成功落地，正以“高温净菌防交叉，人机协同减负担”的实际价值，持续重塑行业标准。
+</p>
+
                     
                     <div class="flex items-center gap-4">
 
@@ -382,18 +771,23 @@
                 </div>
                 
                 <div class="lg:w-1/2">
-                    <div class="grid grid-cols-1 gap-6">
+                   <div class="grid grid-cols-1 gap-6 auto-rows-fr">
                         <div class="bg-slate-50 p-6 rounded-xl border-l-4 border-brand-500">
-                            <h4 class="font-bold text-lg mb-2">核心技术壁垒</h4>
-                            <p class="text-slate-600 text-sm">全栈掌握机器视觉（SLAM）、动态路径规划、多机协同及具身智能中枢平台技术。</p>
+                            <h4 class="font-bold text-lg mb-2" data-i18n="about.card1_title">核心技术壁垒</h4>
+                           <p class="text-slate-600 text-sm" data-i18n="about.card1_desc">
+    以具身智能为核心，构建覆盖感知、决策与执行的完整技术闭环，全面掌握 SLAM、机器视觉、动态路径规划与多机协同等关键能力。
+</p>
                         </div>
-                        <div class="bg-slate-50 p-6 rounded-xl border-l-4 border-brand-500">
-                            <h4 class="font-bold text-lg mb-2">专家团队</h4>
-                            <p class="text-slate-600 text-sm">汇聚顶尖人才，博士领衔研发，深耕机器人底层算法与硬件控制。</p>
+                        <div class="bg-slate-50 p-6 rounded-xl border-l-4 border-brand-500 h-full">
+                            <h4 class="font-bold text-lg mb-2" data-i18n="about.card2_title">专家团队</h4>
+                            <p class="text-slate-600 text-sm" data-i18n="about.card2_desc">
+    团队研发背景源自浙江大学、中国计量大学等顶尖高校实验室，由博士领衔，兼具前沿科研深度与工程化落地能力。
+</p>
+
                         </div>
-                        <div class="bg-slate-50 p-6 rounded-xl border-l-4 border-brand-500">
-                            <h4 class="font-bold text-lg mb-2">市场愿景</h4>
-                            <p class="text-slate-600 text-sm">致力于成为全球领先的智能技术解决方案提供商，让机器人服务于世界的每一个角落。</p>
+                        <div class="bg-slate-50 p-6 rounded-xl border-l-4 border-brand-500 h-full">
+                            <h4 class="font-bold text-lg mb-2" data-i18n="about.card3_title">市场愿景</h4>
+                            <p class="text-slate-600 text-sm" data-i18n="about.card3_desc">致力于成为全球领先的智能技术解决方案提供商，让机器人服务于世界的每一个角落。</p>
                         </div>
                     </div>
                 </div>
@@ -401,15 +795,19 @@
         </div>
     </section>
 
+
+        
+
+
     <!-- 新闻中心 -->
     <section id="news" class="py-24 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-end mb-12">
                 <div>
                     <h2 class="text-brand-600 font-semibold tracking-wide uppercase text-sm mb-2">News Center</h2>
-                    <h3 class="text-3xl font-bold text-slate-900">动态与洞察</h3>
+                    <h3 class="text-3xl font-bold text-slate-900" data-i18n="news.main_title">动态与洞察</h3>
                 </div>
-                <a href="#" class="hidden md:inline-flex items-center text-brand-600 hover:text-brand-800 font-medium">查看更多 <i class="fa-solid fa-arrow-right ml-2"></i></a>
+                <a href="#" class="hidden md:inline-flex items-center text-brand-600 hover:text-brand-800 font-medium" data-i18n="news.view_more">查看更多 <i class="fa-solid fa-arrow-right ml-2"></i></a>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -419,9 +817,9 @@
                          <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                     </div>
                     <div class="p-6">
-                        <div class="text-xs text-brand-600 font-bold mb-2">公司动态</div>
-                        <h4 class="font-bold text-lg mb-3 group-hover:text-brand-600 transition">望潮机器人即将亮相世界级展会</h4>
-                        <p class="text-slate-500 text-sm line-clamp-2">展示最新C1清洁机器人，获得行业专家高度评价...</p>
+                        <div class="text-xs text-brand-600 font-bold mb-2" data-i18n="news.news1_category">公司动态</div>
+                        <h4 class="font-bold text-lg mb-3 group-hover:text-brand-600 transition" data-i18n="news.news1_title">望潮机器人即将亮相世界级展会</h4>
+                        <p class="text-slate-500 text-sm line-clamp-2" data-i18n="news.news1_desc">展示最新C1清洁机器人，获得行业专家高度评价...</p>
                     </div>
                 </div>
                  <!-- News 2 -->
@@ -430,9 +828,9 @@
                         <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                     </div>
                     <div class="p-6">
-                        <div class="text-xs text-brand-600 font-bold mb-2">行业洞察</div>
-                        <h4 class="font-bold text-lg mb-3 group-hover:text-brand-600 transition">智慧运维：商用机器人的下一个风口</h4>
-                        <p class="text-slate-500 text-sm line-clamp-2">探讨如何通过人机协同降低运营成本，提升管理效率...</p>
+                        <div class="text-xs text-brand-600 font-bold mb-2" data-i18n="news.news2_category">行业洞察</div>
+                        <h4 class="font-bold text-lg mb-3 group-hover:text-brand-600 transition"data-i18n="news.news2_title">智慧运维：商用机器人的下一个风口</h4>
+                        <p class="text-slate-500 text-sm line-clamp-2" data-i18n="news.news2_desc">探讨如何通过人机协同降低运营成本，提升管理效率...</p>
                     </div>
                 </div>
                  <!-- News 3 -->
@@ -441,14 +839,17 @@
                         <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2032&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                     </div>
                     <div class="p-6">
-                        <div class="text-xs text-brand-600 font-bold mb-2">合作签约</div>
-                        <h4 class="font-bold text-lg mb-3 group-hover:text-brand-600 transition">与某大型物业集团达成战略合作</h4>
-                        <p class="text-slate-500 text-sm line-clamp-2">将在全国50个商业综合体部署智能巡检平台...</p>
+                        <div class="text-xs text-brand-600 font-bold mb-2" data-i18n="news.news3_category">合作签约</div>
+                        <h4 class="font-bold text-lg mb-3 group-hover:text-brand-600 transition" data-i18n="news.news3_title">与某大型物业集团达成战略合作</h4>
+                        <p class="text-slate-500 text-sm line-clamp-2" data-i18n="news.news3_desc">将在全国50个商业综合体部署智能巡检平台...</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+
+        
 
    <!-- 联系我们 -->
 <section id="contact" class="py-24 bg-slate-900 text-white">
@@ -456,15 +857,15 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div>
                 <h2 class="text-brand-400 font-semibold tracking-wide uppercase text-sm mb-2">Contact Us</h2>
-                <h3 class="text-3xl md:text-4xl font-bold mb-6">让我们共同探索<br>智能科技的未来</h3>
-                <p class="text-slate-400 mb-10 text-lg">无论您是寻找解决方案，还是希望建立合作关系，我们都期待您的来信。</p>
+                <h3 class="text-3xl md:text-4xl font-bold mb-6" data-i18n="contact.main_title">让我们共同探索智能科技的未来</h3>
+                <p class="text-slate-400 mb-10 text-lg" data-i18n="contact.desc">无论您是寻找解决方案，还是希望建立合作关系，我们都期待您的来信。</p>
                 
                 <div class="space-y-6">
                     <div class="flex items-start">
                         <i class="fa-solid fa-location-dot text-brand-500 mt-1 mr-4 text-xl"></i>
                         <div>
-                            <h5 class="font-bold text-lg">公司地址</h5>
-                            <p class="text-slate-400">浙江省杭州市滨江区长河街道滨安路1181号A 幢17 F<br>
+                            <h5 class="font-bold text-lg" data-i18n="contact.address_title">公司地址</h5>
+                            <p class="text-slate-400" data-i18n="contact.address">浙江省杭州市滨江区长河街道滨安路1181号A 幢17 F<br>
 17F, Building A, No. 1181 Bin'an Road, Changhe Street, Binjiang 
 District, Hangzhou City, Zhejiang Province, China (310051)</p>
                         </div>
@@ -472,14 +873,14 @@ District, Hangzhou City, Zhejiang Province, China (310051)</p>
                     <div class="flex items-start">
                         <i class="fa-solid fa-phone text-brand-500 mt-1 mr-4 text-xl"></i>
                         <div>
-                            <h5 class="font-bold text-lg">联系电话</h5>
+                            <h5 class="font-bold text-lg" data-i18n="contact.phone_title">联系电话</h5>
                             <p class="text-slate-400">+86 180 6797 1668</p>
                         </div>
                     </div>
                     <div class="flex items-start">
                         <i class="fa-solid fa-envelope text-brand-500 mt-1 mr-4 text-xl"></i>
                         <div>
-                            <h5 class="font-bold text-lg">电子邮箱</h5>
+                            <h5 class="font-bold text-lg" data-i18n="contact.email_title">电子邮箱</h5>
                             <p class="text-slate-400">wanghuis@dingtalk.com</p>
                         </div>
                     </div>
@@ -487,7 +888,7 @@ District, Hangzhou City, Zhejiang Province, China (310051)</p>
             </div>
 
             <div class="bg-white rounded-2xl p-8 text-slate-800">
-                <h4 class="text-2xl font-bold mb-6">询价与合作</h4>
+                <h4 class="text-2xl font-bold mb-6" data-i18n="contact.desc" data-i18n ="contact.form_title">询价与合作</h4>
                 
                 <!-- 表单添加ID和action -->
                 <form id="contactForm" 
@@ -504,28 +905,28 @@ District, Hangzhou City, Zhejiang Province, China (310051)</p>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label for="name" class="block text-sm font-medium text-slate-700 mb-1">姓名 *</label>
+                            <label for="name" class="block text-sm font-medium text-slate-700 mb-1" data-i18n="contact.form_name">姓名 *</label>
                             <input type="text" 
                                    id="name"
                                    name="name" 
                                    required
-                                   class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition" 
+                                   class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition" data-i18n-placeholder="contact.form_name_placeholder"
                                    placeholder="您的姓名">
                         </div>
                         <div>
-                            <label for="company" class="block text-sm font-medium text-slate-700 mb-1">公司 *</label>
+                            <label for="company" class="block text-sm font-medium text-slate-700 mb-1" data-i18n= "contact.form_company">公司 *</label>
                             <input type="text" 
                                    id="company"
                                    name="company" 
                                    required
-                                   class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition" 
+                                   class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition"  data-i18n-placeholder= "contact.form_company_placeholder"
                                    placeholder="公司名称">
                         </div>
                     </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label for="country" class="block text-sm font-medium text-slate-700 mb-1">国家/地区 *</label>
+                            <label for="country" class="block text-sm font-medium text-slate-700 mb-1" data-i18n="contact.form_country">国家/地区 *</label>
                             <input type="text" 
                                    id="country"
                                    name="country" 
@@ -534,44 +935,44 @@ District, Hangzhou City, Zhejiang Province, China (310051)</p>
                                    placeholder="China">
                         </div>
                         <div>
-                            <label for="email" class="block text-sm font-medium text-slate-700 mb-1">邮箱 *</label>
+                            <label for="email" class="block text-sm font-medium text-slate-700 mb-1" data-i18n="contact.form_email">邮箱 *</label>
                             <input type="email" 
                                    id="email"
                                    name="email" 
                                    required
-                                   class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition" 
+                                   class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition"  data-i18n-placeholder="contact.form_email_placeholder"
                                    placeholder="您的邮箱地址">
                         </div>
                     </div>
                     
                     <div>
-                        <label for="product" class="block text-sm font-medium text-slate-700 mb-1">需求类型 *</label>
+                        <label for="product" class="block text-sm font-medium text-slate-700 mb-1" data-i18n="contact.form_product">需求类型 *</label>
                         <select id="product"
                                 name="product" 
                                 required
                                 class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition bg-white">
-                            <option value="">请选择需求类型</option>
-                            <option value="清洁机器人 (Wangchao C1)">清洁机器人 (Wangchao C1)</option>
-                            <option value="智能巡检平台">智能巡检平台</option>
-                            <option value="定制解决方案">定制解决方案</option>
-                            <option value="其他合作">其他合作</option>
+                            <option value="" data-i18n="contact.form_option0">请选择需求类型</option>
+                            <option value="清洁机器人 (Wangchao C1)" data-i18n="contact.form_option1">清洁机器人 (Wangchao C1)</option>
+                            <option value="智能巡检平台" data-i18n="contact.form_option2">智能巡检平台</option>
+                            <option value="定制解决方案" data-i18n="contact.form_option3">定制解决方案</option>
+                            <option value="其他合作" data-i18n="contact.form_option4">其他合作</option>
                         </select>
                     </div>
                     
                     <div>
-                        <label for="message" class="block text-sm font-medium text-slate-700 mb-1">留言内容 *</label>
+                        <label for="message" class="block text-sm font-medium text-slate-700 mb-1" data-i18n="contact.form_message">留言内容 *</label>
                         <textarea id="message"
                                   name="message" 
                                   rows="4" 
                                   required
-                                  class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition" 
+                                  class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition"   data-i18n-placeholder="contact.form_message_placeholder"
                                   placeholder="请简述您的需求..."></textarea>
                     </div>
                     
                     <!-- 提交按钮 -->
                     <button type="submit" 
                             id="submitBtn"
-                            class="w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition shadow-lg shadow-brand-500/30">
+                            class="w-full bg-brand-600 text-white font-bold py-3 rounded-lg hover:bg-brand-700 transition shadow-lg shadow-brand-500/30" data-i18n= "contact.form_submit">
                         提交咨询
                     </button>
                     
@@ -642,6 +1043,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+
+
     <!-- Footer -->
  <footer class="bg-white text-slate-800 py-12 border-t border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -652,26 +1055,26 @@ document.addEventListener('DOMContentLoaded', function() {
                          alt="望潮创新 Logo"
                          class="h-8 w-auto">
                 </div>
-                <p class="text-sm">重新定义智能运维，让科技服务生活。</p>
+                <p class="text-sm" data-i18n="footer.tagline">重新定义智能运维，让科技服务生活。</p>
             </div>
             <div>
-                <h5 class="font-bold mb-4">业务领域</h5>
+                <h5 class="font-bold mb-4" data-i18n="footer.services_title">业务领域</h5>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-brand-500 transition">全域清洁机器人</a></li>
-                    <li><a href="#" class="hover:text-brand-500 transition">智能巡检平台</a></li>
-                    <li><a href="#" class="hover:text-brand-500 transition">工业解决方案</a></li>
+                    <li data-i18n="footer.services1"><a href="#" class="hover:text-brand-500 transition">空间具身清洁机器人</a></li>
+                    <li data-i18n="footer.services2"><a href="#" class="hover:text-brand-500 transition">智能巡检平台</a></li>
+                    <li data-i18n="footer.services3"><a href="#" class="hover:text-brand-500 transition">工业解决方案</a></li>
                 </ul>
             </div>
             <div>
-                <h5 class="font-bold mb-4">技术资源</h5>
+                <h5 class="font-bold mb-4" data-i18n="footer.resources_title">技术资源</h5>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-brand-500 transition">技术白皮书</a></li>
-                    <li><a href="#" class="hover:text-brand-500 transition">开发者文档</a></li>
-                    <li><a href="#" class="hover:text-brand-500 transition">API 接口</a></li>
+                    <li data-i18n="footer.resources1"><a href="#" class="hover:text-brand-500 transition">技术白皮书</a></li>
+                    <li data-i18n="footer.resources2"><a href="#" class="hover:text-brand-500 transition">开发者文档</a></li>
+                    <li data-i18n="footer.resources3"><a href="#" class="hover:text-brand-500 transition">API 接口</a></li>
                 </ul>
             </div>
             <div>
-                <h5 class="font-bold mb-4">关注我们</h5>
+                <h5 class="font-bold mb-4" data-i18n="footer.follow_title">关注我们</h5>
                 <div class="flex space-x-4">
                     <a href="#" class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center hover:bg-brand-600 hover:text-white transition"><i class="fa-brands fa-weixin"></i></a>
                     <a href="#" class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center hover:bg-brand-600 hover:text-white transition"><i class="fa-brands fa-linkedin-in"></i></a>
@@ -682,11 +1085,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="bg-white p-2 rounded inline-block">
                         <img src="qrcode.jpg" alt="微信公众号二维码" class="w-32 h-32">
                     </div>
-                    <p class="text-xs text-slate-500 mt-2">扫码联系我们</p>
+                    <p class="text-xs text-slate-500 mt-2"  data-i18n="footer.qr_text">扫码联系我们</p>
                 </div>
             </div>
         </div>
-        <div class="border-t border-slate-200 pt-8 flex flex-col md:flex-row justify-between items-center text-xs">
+        <div class="border-t border-slate-200 pt-8 flex flex-col md:flex-row justify-between items-center text-xs" data-i18n="footer.copyright">
             <p>&copy; 2026 望潮创新机器人 版权所有</p>
             <p class="mt-2 md:mt-0"></p>
         </div>
@@ -695,28 +1098,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+
+
     <!-- 简单交互脚本 -->
-    <script>
-        // 移动端菜单切换
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
+<script>
+window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
 
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
+    if (window.scrollY > 50) {
+        navbar.classList.add('bg-white', 'shadow-md');
+        navbar.classList.remove('bg-transparent');
+    } else {
+        navbar.classList.remove('bg-white', 'shadow-md');
+        navbar.classList.add('bg-transparent');
+    }
+});
+</script>
 
-        // 导航栏滚动效果
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 20) {
-                navbar.classList.add('shadow-md');
-                navbar.classList.replace('bg-white/90', 'bg-white/95');
-            } else {
-                navbar.classList.remove('shadow-md');
-                navbar.classList.replace('bg-white/95', 'bg-white/90');
-            }
-        });
-    </script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -755,6 +1153,7 @@ function updateSlider(i) {
 
 });
 </script>
+
 
 
 </body>
