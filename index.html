@@ -585,7 +585,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                         <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
                             <div class="text-2xl font-bold text-slate-900">>99%</div>
-                            <div class="text-sm text-slate-500"data-i18n="products.stats3_label">细菌去除率</div>
+                            <div class="text-sm text-slate-500"data-i18n="products.stats2_label">细菌去除率</div>
                         </div>
                         <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
                             <div class="text-2xl font-bold text-slate-900">300%</div>
@@ -888,7 +888,7 @@ District, Hangzhou City, Zhejiang Province, China (310051)</p>
             </div>
 
             <div class="bg-white rounded-2xl p-8 text-slate-800">
-                <h4 class="text-2xl font-bold mb-6" data-i18n="contact.desc" data-i18n ="contact.form_title">询价与合作</h4>
+                <h4 class="text-2xl font-bold mb-6"  data-i18n ="contact.form_title">询价与合作</h4>
                 
                 <!-- 表单添加ID和action -->
                 <form id="contactForm" 
@@ -990,19 +990,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('contactForm');
     const submitBtn = document.getElementById('submitBtn');
     const formMessage = document.getElementById('formMessage');
-    
+
+    function showMessage(message, type) {
+        formMessage.textContent = message;
+        formMessage.classList.remove('hidden');
+
+        if (type === 'success') {
+            formMessage.className =
+                'text-green-700 bg-green-100 border border-green-200 text-center text-sm mt-2 p-2 rounded';
+        } else {
+            formMessage.className =
+                'text-red-700 bg-red-100 border border-red-200 text-center text-sm mt-2 p-2 rounded';
+        }
+    }
+
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
-        
-        // 禁用按钮，防止重复提交
+
+        // 禁用按钮
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i>提交中...';
-        
+        submitBtn.innerHTML =
+            '<i class="fa-solid fa-spinner fa-spin mr-2"></i>提交中...';
+
         try {
-            // 使用FormData收集表单数据
             const formData = new FormData(form);
-            
-            // 发送到Formspree
+
             const response = await fetch(form.action, {
                 method: 'POST',
                 body: formData,
@@ -1010,38 +1022,29 @@ document.addEventListener('DOMContentLoaded', function() {
                     'Accept': 'application/json'
                 }
             });
-            
+
             if (response.ok) {
-                // 提交成功
                 showMessage('提交成功！我们会尽快与您联系。', 'success');
                 form.reset();
             } else {
-                // 提交失败
-                showMessage('提交失败，请稍后重试或直接发送邮件至 wanghuis@dingtalk.com', 'error');
+                showMessage(
+                    '提交失败，请稍后重试或直接发送邮件至 wanghuis@dingtalk.com',
+                    'error'
+                );
             }
         } catch (error) {
             showMessage('网络错误，请检查网络连接。', 'error');
         } finally {
-            // 恢复按钮状态
+            // 恢复按钮
             setTimeout(() => {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = '提交咨询';
-            }, 3000);
+                submitBtn.textContent = '提交咨询';
+            }, 1500);
         }
     });
-    
-    function showMessage(text, type) {
-        formMessage.textContent = text;
-        formMessage.className = `text-center text-sm mt-2 p-2 rounded ${type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`;
-        formMessage.classList.remove('hidden');
-        
-        // 5秒后隐藏消息
-        setTimeout(() => {
-            formMessage.classList.add('hidden');
-        }, 5000);
-    }
 });
 </script>
+
 
 
 
