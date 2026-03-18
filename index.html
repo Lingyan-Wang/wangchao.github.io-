@@ -59,6 +59,8 @@ const translations = {
         "nav.about": "关于我们",
         "nav.news": "动态",
         "nav.contact": "联系我们",
+        "nav.cooperation": "意向合作",
+        "nav.recruitment": "招贤纳士",
         
         // Hero Section
         "hero.tagline": "引领智能运维新时代",
@@ -130,6 +132,22 @@ const translations = {
         "solutions.card4_desc": "工厂、管廊的巡检与特种作业。",
         "solutions.card4_item1": "• 危险环境替代",
         "solutions.card4_item2": "• 数据实时回传",
+        "solutions.card5_title": "酒店",
+        "solutions.card5_desc": "酒店客房、公共区域的日常清洁与消毒，提升住客体验。",
+        "solutions.card5_item1": "• 客房智能清洁",
+        "solutions.card5_item2": "• 公共区域消毒",
+        "solutions.card6_title": "体育场",
+        "solutions.card6_desc": "大型体育场馆的看台、通道等区域的清洁与巡检。",
+        "solutions.card6_item1": "• 赛后快速清洁",
+        "solutions.card6_item2": "• 设施安全巡检",
+        "solutions.card7_title": "文旅相关",
+        "solutions.card7_desc": "景区、博物馆等文化旅游场所的清洁与游客服务。",
+        "solutions.card7_item1": "• 环境整洁维护",
+        "solutions.card7_item2": "• 智能导览服务",
+        "solutions.card8_title": "康养机构",
+        "solutions.card8_desc": "养老院、康复中心等场所的清洁与健康监测。",
+        "solutions.card8_item1": "• 卫生环境保障",
+        "solutions.card8_item2": "• 老人安全监测",
         
         // About Section
         "about.section_title": "关于我们",
@@ -213,6 +231,8 @@ const translations = {
         "nav.about": "About Us",
         "nav.news": "News",
         "nav.contact": "Contact Us",
+        "nav.cooperation": "Cooperation",
+        "nav.recruitment": "Careers",
         
         // Hero Section
         "hero.tagline": "Leading the New Era of Smart Operations",
@@ -283,6 +303,22 @@ const translations = {
         "solutions.card4_desc": "Inspection and special operations for factories and pipelines.",
         "solutions.card4_item1": "• Hazardous environment replacement",
         "solutions.card4_item2": "• Real-time data transmission",
+        "solutions.card5_title": "Hotels",
+        "solutions.card5_desc": "Daily cleaning and disinfection of hotel rooms and public areas to enhance guest experience.",
+        "solutions.card5_item1": "• Intelligent room cleaning",
+        "solutions.card5_item2": "• Public area disinfection",
+        "solutions.card6_title": "Stadiums",
+        "solutions.card6_desc": "Cleaning and inspection of stands, passages and other areas in large stadiums.",
+        "solutions.card6_item1": "• Post-match quick cleaning",
+        "solutions.card6_item2": "• Facility safety inspection",
+        "solutions.card7_title": "Cultural Tourism",
+        "solutions.card7_desc": "Cleaning and tourist services in scenic spots, museums and other cultural tourism venues.",
+        "solutions.card7_item1": "• Environmental cleanliness maintenance",
+        "solutions.card7_item2": "• Intelligent guided tour services",
+        "solutions.card8_title": "Healthcare Facilities",
+        "solutions.card8_desc": "Cleaning and health monitoring in nursing homes, rehabilitation centers and other facilities.",
+        "solutions.card8_item1": "• Hygienic environment guarantee",
+        "solutions.card8_item2": "• Elderly safety monitoring",
         
         // About Section
         "about.section_title": "About Us",
@@ -419,6 +455,50 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 设置初始语言
     setLanguage(defaultLang);
+    
+    // 移动端联系我们下拉菜单功能
+    const mobileContactBtn = document.getElementById('mobile-contact-btn');
+    const mobileContactDropdown = document.getElementById('mobile-contact-dropdown');
+    
+    if (mobileContactBtn && mobileContactDropdown) {
+        mobileContactBtn.addEventListener('click', function() {
+            mobileContactDropdown.classList.toggle('hidden');
+            const icon = this.querySelector('i');
+            if (icon) {
+                icon.classList.toggle('rotate-180');
+            }
+        });
+    }
+    
+    // 桌面端联系我们下拉菜单功能
+    const desktopContactBtn = document.getElementById('desktop-contact-btn');
+    const desktopContactMenu = document.getElementById('desktop-contact-menu');
+    const desktopContactDropdown = document.getElementById('desktop-contact-dropdown');
+    
+    if (desktopContactBtn && desktopContactMenu && desktopContactDropdown) {
+        // 显示菜单
+        function showMenu() {
+            desktopContactMenu.classList.remove('opacity-0', 'invisible');
+            desktopContactMenu.classList.add('opacity-100', 'visible');
+            desktopContactBtn.querySelector('i').classList.add('rotate-180');
+        }
+        
+        // 隐藏菜单
+        function hideMenu() {
+            desktopContactMenu.classList.add('opacity-0', 'invisible');
+            desktopContactMenu.classList.remove('opacity-100', 'visible');
+            desktopContactBtn.querySelector('i').classList.remove('rotate-180');
+        }
+        
+        // 鼠标悬停在按钮上
+        desktopContactBtn.addEventListener('mouseenter', showMenu);
+        
+        // 鼠标悬停在菜单上
+        desktopContactMenu.addEventListener('mouseenter', showMenu);
+        
+        // 鼠标离开整个下拉区域
+        desktopContactDropdown.addEventListener('mouseleave', hideMenu);
+    }
 });
 </script>
 </body>
@@ -445,9 +525,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     <a href="#solutions" class="text-slate-600 hover:text-brand-600 font-medium transition" data-i18n="nav.solutions">解决方案</a>
                     <a href="#about"  class="text-slate-600 hover:text-brand-600 font-medium transition" data-i18n="nav.about">关于我们</a>
                     <a href="#news" class="text-slate-600 hover:text-brand-600 font-medium transition" data-i18n="nav.news">动态</a>
-                    <a href="#contact" class="px-5 py-2.5 bg-brand-600 text-white rounded-full font-medium hover:bg-brand-700 transition shadow-lg shadow-brand-500/30" data-i18n="nav.contact">
-                        联系我们
-                    </a>
+                    <div class="relative" id="desktop-contact-dropdown">
+                        <button id="desktop-contact-btn" class="px-5 py-2.5 bg-brand-600 text-white rounded-full font-medium hover:bg-brand-700 transition shadow-lg shadow-brand-500/30 flex items-center gap-2">
+                            <span data-i18n="nav.contact">联系我们</span>
+                            <i class="fa-solid fa-chevron-down text-xs transition-transform"></i>
+                        </button>
+                        <div id="desktop-contact-menu" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 z-50 opacity-0 invisible transition-all duration-200">
+                            <a href="#contact" class="block px-4 py-2 text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition" data-i18n="nav.cooperation">意向合作</a>
+                            <a href="https://www.zhipin.com/web/geek/jobs?city=101210100&query=%E6%B5%B7%E9%81%93%E4%BC%A0" target="_blank" class="block px-4 py-2 text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition" data-i18n="nav.recruitment">招贤纳士</a>
+                        </div>
+                    </div>
                 </div>
 		
 		<!-- Language Switch -->
@@ -473,7 +560,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 <a href="#products" class="block px-3 py-2 text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600 rounded-md">核心产品</a>
                 <a href="#solutions" class="block px-3 py-2 text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600 rounded-md">解决方案</a>
                 <a href="#about" class="block px-3 py-2 text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600 rounded-md">关于我们</a>
-                <a href="#contact" class="block px-3 py-2 text-base font-medium text-brand-600 bg-brand-50 rounded-md">联系我们</a>
+                <div class="space-y-1">
+                    <button id="mobile-contact-btn" class="w-full text-left px-3 py-2 text-base font-medium text-brand-600 bg-brand-50 rounded-md flex justify-between items-center">
+                        <span data-i18n="nav.contact"></span>联系我们</span>
+                        <i class="fa-solid fa-chevron-down text-xs transition-transform"></i>
+                    </button>
+                    <div id="mobile-contact-dropdown" class="hidden pl-4 space-y-1">
+                        <a href="#contact" class="block px-3 py-2 text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600 rounded-md" data-i18n="nav.cooperation">意向合作</a>
+                        <a href="https://www.zhipin.com/web/geek/jobs?city=101210100&query=%E6%B5%B7%E9%81%93%E4%BC%A0" target="_blank" class="block px-3 py-2 text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600 rounded-md" data-i18n="nav.recruitment">招贤纳士</a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -695,6 +791,77 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         </div>
+
+        <!-- 新增功能模块 -->
+        <div class="mt-24">
+            <!-- 3D 立体感知与材质识别 -->
+            <div class="mb-20">
+                <div class="flex items-center justify-center mb-8">
+                    <span class="h-px w-12 bg-blue-500"></span>
+                    <h3 class="text-2xl font-semibold text-slate-700 mx-4 text-center">
+                        3D 立体感知与材质识别
+                    </h3>
+                    <span class="h-px w-12 bg-blue-500"></span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 hover:shadow-lg transition">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-cube text-2xl text-brand-600"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-3">厘米级精度立体结构识别</h4>
+                        <p class="text-slate-600 text-sm">融合激光雷达、视觉相机与深度传感器，实现厘米级精度的立体结构识别，精准捕捉墙面平整度、玻璃反光、隔断纹理等细节。</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 hover:shadow-lg transition">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-paint-roller text-2xl text-brand-600"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-3">智能材质识别与匹配</h4>
+                        <p class="text-slate-600 text-sm">智能区分瓷砖、玻璃、金属、亚克力等多种材质，自动匹配清洁力度与工具，避免刮伤高价值表面。</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 hover:shadow-lg transition">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-map text-2xl text-brand-600"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-3">空间语义地图构建</h4>
+                        <p class="text-slate-600 text-sm">实时构建空间语义地图，让机器人"看懂"空间布局，精准识别插座、门把手、管线等障碍物，规避碰撞与作业盲区。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 垂直空间大模型决策引擎 -->
+            <div>
+                <div class="flex items-center justify-center mb-8">
+                    <span class="h-px w-12 bg-blue-500"></span>
+                    <h3 class="text-2xl font-semibold text-slate-700 mx-4 text-center">
+                        垂直空间大模型决策引擎
+                    </h3>
+                    <span class="h-px w-12 bg-blue-500"></span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 hover:shadow-lg transition">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-brain text-2xl text-brand-600"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-3">空间理解与逻辑推理</h4>
+                        <p class="text-slate-600 text-sm">基于海量真实场景数据训练，构建垂直空间知识图谱，让机器人具备空间理解与逻辑推理能力。</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 hover:shadow-lg transition">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-route text-2xl text-brand-600"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-3">最优清洁路径规划</h4>
+                        <p class="text-slate-600 text-sm">动态规划最优清洁路径与作业策略：自动分配清洁顺序、调节刷洗频次、切换清洁模式，实现"一次作业、全域覆盖"。</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 hover:shadow-lg transition">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-microchip text-2xl text-brand-600"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-3">边缘端实时推理</h4>
+                        <p class="text-slate-600 text-sm">支持边缘端实时推理，结合中昊芯英国产算力芯片，实现低延迟、高可靠的智能决策，适配复杂多变的商用环境。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -817,6 +984,58 @@ document.addEventListener('DOMContentLoaded', function() {
                     <ul class="text-xs text-slate-400 space-y-2">
                         <li data-i18n="solutions.card4_item1">• 危险环境替代</li>
                         <li data-i18n="solutions.card4_item2">• 数据实时回传</li>
+                    </ul>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="bg-white rounded-xl shadow-sm hover:shadow-xl transition duration-300 p-6 border border-slate-100 group">
+                    <div class="w-14 h-14 bg-blue-50 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-600 transition">
+                        <i class="fa-solid fa-hotel text-2xl text-brand-600 group-hover:text-white transition"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3" data-i18n="solutions.card5_title">酒店</h4>
+                    <p class="text-slate-500 text-sm mb-4" data-i18n="solutions.card5_desc">酒店客房、公共区域的日常清洁与消毒，提升住客体验。</p>
+                    <ul class="text-xs text-slate-400 space-y-2">
+                        <li data-i18n="solutions.card5_item1">• 客房智能清洁</li>
+                        <li data-i18n="solutions.card5_item2">• 公共区域消毒</li>
+                    </ul>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="bg-white rounded-xl shadow-sm hover:shadow-xl transition duration-300 p-6 border border-slate-100 group">
+                    <div class="w-14 h-14 bg-blue-50 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-600 transition">
+                        <i class="fa-solid fa-futbol text-2xl text-brand-600 group-hover:text-white transition"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3" data-i18n="solutions.card6_title">体育场</h4>
+                    <p class="text-slate-500 text-sm mb-4" data-i18n="solutions.card6_desc">大型体育场馆的看台、通道等区域的清洁与巡检。</p>
+                    <ul class="text-xs text-slate-400 space-y-2">
+                        <li data-i18n="solutions.card6_item1">• 赛后快速清洁</li>
+                        <li data-i18n="solutions.card6_item2">• 设施安全巡检</li>
+                    </ul>
+                </div>
+
+                <!-- Card 7 -->
+                <div class="bg-white rounded-xl shadow-sm hover:shadow-xl transition duration-300 p-6 border border-slate-100 group">
+                    <div class="w-14 h-14 bg-blue-50 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-600 transition">
+                        <i class="fa-solid fa-mountain text-2xl text-brand-600 group-hover:text-white transition"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3" data-i18n="solutions.card7_title">文旅相关</h4>
+                    <p class="text-slate-500 text-sm mb-4" data-i18n="solutions.card7_desc">景区、博物馆等文化旅游场所的清洁与游客服务。</p>
+                    <ul class="text-xs text-slate-400 space-y-2">
+                        <li data-i18n="solutions.card7_item1">• 环境整洁维护</li>
+                        <li data-i18n="solutions.card7_item2">• 智能导览服务</li>
+                    </ul>
+                </div>
+
+                <!-- Card 8 -->
+                <div class="bg-white rounded-xl shadow-sm hover:shadow-xl transition duration-300 p-6 border border-slate-100 group">
+                    <div class="w-14 h-14 bg-blue-50 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-600 transition">
+                        <i class="fa-solid fa-heart-pulse text-2xl text-brand-600 group-hover:text-white transition"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3" data-i18n="solutions.card8_title">康养机构</h4>
+                    <p class="text-slate-500 text-sm mb-4" data-i18n="solutions.card8_desc">养老院、康复中心等场所的清洁与健康监测。</p>
+                    <ul class="text-xs text-slate-400 space-y-2">
+                        <li data-i18n="solutions.card8_item1">• 卫生环境保障</li>
+                        <li data-i18n="solutions.card8_item2">• 老人安全监测</li>
                     </ul>
                 </div>
             </div>
